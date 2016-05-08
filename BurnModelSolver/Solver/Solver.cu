@@ -15,7 +15,9 @@ void Solver::step()
             done = true;
         }
 
-        is_y_current = false;
+        if (is_y_current) {
+            is_y_current = false;
+        }
     }
 }
 
@@ -31,8 +33,8 @@ void Solver::alloc_mem()
 
 void Solver::free_mem()
 {
-    cudaFree(d_y_in);
-    cudaFree(d_y_out);
+    cuda_check_error(cudaFree(d_y_in));
+    cuda_check_error(cudaFree(d_y_out));
 }
 
 void Solver::copy_from_device()

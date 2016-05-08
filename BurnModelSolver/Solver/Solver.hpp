@@ -63,7 +63,7 @@ class Solver {
 
         void step();
 
-        virtual void save(const std::string& path, const std::string& file_name);
+        virtual void save(const std::string& file_path, const std::string& file_name);
         bool is_done();
 
         const std::vector<float>& get_x();

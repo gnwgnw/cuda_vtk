@@ -18,7 +18,7 @@ Solver::Solver(size_t N)
         , grids(N / threads + (N % threads ? 1 : 0))
 {
     if (N < 1) {
-        throw std::invalid_argument("N must be non-zero\n");
+        THROW_INVALID_ARG(N);
     }
 
     recalc_h();
@@ -27,7 +27,12 @@ Solver::Solver(size_t N)
 
 Solver::~Solver()
 {
-    free_mem();
+    try {
+        free_mem();
+    }
+    catch (Cuda_exception& exception) {
+        std::cerr << exception.what() << std::endl;
+    }
 }
 
 void Solver::recalc_h()
@@ -44,23 +49,29 @@ void Solver::save(const std::string& file_path, const std::string& file_name)
 
     std::ofstream file = get_file(file_path, file_name);
 
+    auto put_delim = [&file](char delim, int n) -> void {
+        file << std::setw(n) << std::setfill(delim) << delim << std::setfill(' ') << std::endl;
+    };
+
     char fill_char = '-';
-    file << std::setw(31) << std::setfill(fill_char) << fill_char << std::setfill(' ') << std::endl;
+    int n = 15;
+
+    put_delim(fill_char, 2 * n + 1);
 
     file << NAME_TO_OUTPUT(N) << std::endl
     << NAME_TO_OUTPUT(t) << std::endl
     << NAME_TO_OUTPUT(tau) << std::endl
     << NAME_TO_OUTPUT(h) << std::endl;
 
-    file << std::setw(31) << std::setfill(fill_char) << fill_char << std::setfill(' ') << std::endl;
+    put_delim(fill_char, 2 * n + 1);
 
-    file << std::setw(15) << "X" << " " << std::setw(15) << "Y" << std::endl;
+    file << std::setw(n) << "X" << " " << std::setw(n) << "Y" << std::endl;
 
     file.precision(6);
     file << std::scientific;
 
     for (size_t i = 0; i < N; ++i) {
-        file << std::setw(15) << x[i] << " " << std::setw(15) << y[i] << std::endl;
+        file << std::setw(n) << x[i] << " " << std::setw(n) << y[i] << std::endl;
     }
 }
 
@@ -169,6 +180,9 @@ void Solver::set_N(const size_t& new_N)
 void Solver::set_t_end(const float& new_t_end)
 {
     t_end = new_t_end;
+    if (t < t_end) {
+        done = false;
+    }
 }
 
 void Solver::fill_x()
