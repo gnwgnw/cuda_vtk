@@ -12,6 +12,7 @@
 #define __device__
 #endif
 
+
 class Params {
     private:
         void fill_A();
