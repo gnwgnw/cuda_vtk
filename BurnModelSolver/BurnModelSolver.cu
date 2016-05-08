@@ -1,6 +1,7 @@
 #include "BurnModelSolver.hpp"
 #include "Solver/cuda_utils.cuh"
 
+
 BurnModelSolver::~BurnModelSolver()
 {
     if (d_params) {

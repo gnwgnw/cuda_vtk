@@ -1,6 +1,7 @@
 #include "Params.hpp"
 #include "BurnModelSolver.hpp"
 
+
 __global__ void _solver_step(float* g_in, float* g_out, size_t N, float h, float tau, Params* params)
 {
     int i = threadIdx.x + blockIdx.x * blockDim.x;

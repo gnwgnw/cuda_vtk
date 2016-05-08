@@ -5,6 +5,7 @@
 #include <fstream>
 #include "BurnModelSolver.hpp"
 
+
 const Params& BurnModelSolver::get_params()
 {
     return params;

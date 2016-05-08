@@ -18,7 +18,7 @@ class BurnModelSolver: public Solver {
         virtual void next_step() override;
 
     public:
-        BurnModelSolver(size_t N)
+        BurnModelSolver(size_t N = 1024)
                 : Solver(N)
         {
         }
