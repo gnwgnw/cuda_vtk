@@ -6,17 +6,15 @@
 #include "BurnModelSolver.hpp"
 
 
-const Params& BurnModelSolver::get_params()
-{
-    return params;
+const Params &BurnModelSolver::get_params() {
+  return params;
 }
 
-void BurnModelSolver::save(const std::string& file_path, const std::string& file_name)
-{
-    std::ofstream file = get_file(file_path, file_name);
+void BurnModelSolver::save(const std::string &file_path, const std::string &file_name) {
+  std::ofstream file = get_file(file_path, file_name);
 
-    file << params << std::endl
-    << "u = " << params.u(get_y()[1] / get_h()) << std::endl;
+  file << params << std::endl
+      << "u = " << params.u(get_y()[1] / get_h()) << std::endl;
 
-    Solver::save(file_path, file_name);
+  Solver::save(file_path, file_name);
 }
