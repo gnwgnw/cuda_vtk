@@ -51,9 +51,9 @@ class Solver {
   float *get_d_y_in();
   float *get_d_y_out();
 
-  const size_t &get_threads();
-  const size_t &get_blocks();
-  const size_t &get_grids();
+  size_t get_threads();
+  size_t get_blocks();
+  size_t get_grids();
 
   std::ofstream get_file(const std::string &file_path, const std::string &file_name);
 
@@ -71,14 +71,14 @@ class Solver {
   double get_t();
   double get_h();
   double get_tau();
-  const size_t &get_N();
+  size_t get_N();
 
-  void set_x0(const float &new_x0);
-  void set_x1(const float &new_x1);
+  void set_x0(float new_x0);
+  void set_x1(float new_x1);
   void set_y(const std::vector<float> &new_y);
   void set_tau(double new_tau);
   void set_h(double new_h);
-  void set_N(const size_t &new_N);
+  void set_N(size_t new_N);
   void set_t_end(double new_t_end);
 };
 

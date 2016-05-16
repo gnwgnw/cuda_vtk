@@ -115,12 +115,12 @@ double Solver::get_tau() {
   return tau;
 }
 
-void Solver::set_x0(const float &new_x0) {
+void Solver::set_x0(float new_x0) {
   x0 = new_x0;
   recalc_h();
 }
 
-void Solver::set_x1(const float &new_x1) {
+void Solver::set_x1(float new_x1) {
   x1 = new_x1;
   recalc_h();
 }
@@ -144,7 +144,7 @@ void Solver::set_h(double new_h) {
   is_x_consistent = false;
 }
 
-void Solver::set_N(const size_t &new_N) {
+void Solver::set_N(size_t new_N) {
   if (new_N < 1) {
     THROW_INVALID_ARG(N);
   }
@@ -179,7 +179,7 @@ void Solver::fill_x() {
   is_x_consistent = true;
 }
 
-const size_t &Solver::get_N() {
+size_t Solver::get_N() {
   return N;
 }
 
@@ -191,20 +191,14 @@ float *Solver::get_d_y_out() {
   return d_y_out;
 }
 
-const size_t &Solver::get_threads() {
+size_t Solver::get_threads() {
   return threads;
 }
 
-const size_t &Solver::get_blocks() {
+size_t Solver::get_blocks() {
   return blocks;
 }
 
-const size_t &Solver::get_grids() {
+size_t Solver::get_grids() {
   return grids;
 }
-
-
-
-
-
-
