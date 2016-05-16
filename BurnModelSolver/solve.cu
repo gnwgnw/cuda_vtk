@@ -34,6 +34,6 @@ void BurnModelSolver::next_step() {
     throw std::invalid_argument("Params not setted\n");
   }
 
-  _solver_step<<<get_grids(), get_blocks()>>>(get_d_y_in(), get_d_y_out(), get_N(), get_h(), get_tau(), d_params);
+  _solver_step<<<get_grids(), get_blocks()>>>(get_d_y_in(), get_d_y_out(), get_N(), static_cast<float>(get_h()), static_cast<float>(get_tau()), d_params);
   cudaDeviceSynchronize();
 }

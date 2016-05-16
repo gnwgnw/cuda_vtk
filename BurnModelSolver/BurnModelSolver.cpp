@@ -14,7 +14,7 @@ void BurnModelSolver::save(const std::string &file_path, const std::string &file
   std::ofstream file = get_file(file_path, file_name);
 
   file << params << std::endl
-      << "u = " << params.u(get_y()[1] / get_h()) << std::endl;
+      << "u = " << params.u(static_cast<float>(get_y()[1] / get_h())) << std::endl;
 
   Solver::save(file_path, file_name);
 }

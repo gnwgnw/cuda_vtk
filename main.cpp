@@ -120,8 +120,8 @@ class TimerCallback: public vtkCommand {
 int main() {
   size_t N = 4096;
   float x1 = 1e-2f;
-  float tau = 1e-8f;
-  float t_end = 1e0f;
+  double tau = 1e-8f;
+  double t_end = 1e0f;
 
 
   Params params;

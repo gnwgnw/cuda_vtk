@@ -103,15 +103,15 @@ const std::vector<float> &Solver::get_y() {
   return y;
 }
 
-const float &Solver::get_t() {
+double Solver::get_t() {
   return t;
 }
 
-const float &Solver::get_h() {
+double Solver::get_h() {
   return h;
 }
 
-const float &Solver::get_tau() {
+double Solver::get_tau() {
   return tau;
 }
 
@@ -130,7 +130,7 @@ void Solver::set_y(const std::vector<float> &new_y) {
   set_N(y.size());
 }
 
-void Solver::set_tau(const float &new_tau) {
+void Solver::set_tau(double new_tau) {
   if (new_tau <= 0) {
     THROW_INVALID_ARG(tau);
   }
@@ -138,9 +138,9 @@ void Solver::set_tau(const float &new_tau) {
   tau = new_tau;
 }
 
-void Solver::set_h(const float &new_h) {
+void Solver::set_h(double new_h) {
   h = new_h;
-  x1 = x0 + h * N;
+  x1 = static_cast<float>(x0 + h * N);
   is_x_consistent = false;
 }
 
@@ -160,7 +160,7 @@ void Solver::set_N(const size_t &new_N) {
   recalc_h();
 }
 
-void Solver::set_t_end(const float &new_t_end) {
+void Solver::set_t_end(double new_t_end) {
   t_end = new_t_end;
   if (t < t_end) {
     done = false;
@@ -168,12 +168,12 @@ void Solver::set_t_end(const float &new_t_end) {
 }
 
 void Solver::fill_x() {
-  float x_it = x0;
-  float h = this->h;
+  double x_it = x0;
+  double h = this->h;
 
-  x[0] = x_it;
+  x[0] = static_cast<float>(x_it);
   std::generate(x.begin() + 1, x.end(), [&x_it, h]() {
-    return x_it += h;
+    return static_cast<float>(x_it += h);
   });
 
   is_x_consistent = true;

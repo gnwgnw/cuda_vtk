@@ -28,11 +28,11 @@ class Solver {
   float x0 = 0.f;
   float x1 = 1.f;
 
-  float t = 0.f;
-  float t_end = 1.f;
+  double t = 0.f;
+  double t_end = 1.f;
 
-  float h;
-  float tau = 1e-3f;
+  double h;
+  double tau = 1e-3f;
 
   void alloc_mem();
   void free_mem();
@@ -68,18 +68,18 @@ class Solver {
 
   const std::vector<float> &get_x();
   const std::vector<float> &get_y();
-  const float &get_t();
-  const float &get_h();
-  const float &get_tau();
+  double get_t();
+  double get_h();
+  double get_tau();
   const size_t &get_N();
 
   void set_x0(const float &new_x0);
   void set_x1(const float &new_x1);
   void set_y(const std::vector<float> &new_y);
-  void set_tau(const float &new_tau);
-  void set_h(const float &new_h);
+  void set_tau(double new_tau);
+  void set_h(double new_h);
   void set_N(const size_t &new_N);
-  void set_t_end(const float &new_t_end);
+  void set_t_end(double new_t_end);
 };
 
 class Cuda_exception: public std::exception {
